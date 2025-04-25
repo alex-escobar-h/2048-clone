@@ -1,34 +1,28 @@
-import { Dispatch, useCallback, useEffect } from 'react';
+import { Dispatch, useCallback, useEffect, useRef } from 'react';
 
 import { CleanupAction, MoveAction } from '../types';
 
 export const useKeyDown = (dispatch: Dispatch<MoveAction | CleanupAction>) => {
+  const isThrottled = useRef(false);
+
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
+      if (isThrottled.current) return;
+
       e.preventDefault();
 
       const key = e.key.toLowerCase();
 
-      switch (key) {
-        case 'arrowup':
-        case 'w':
-          dispatch({ type: 'up' });
-          break;
-        case 'arrowdown':
-        case 's':
-          dispatch({ type: 'down' });
-          break;
-        case 'arrowleft':
-        case 'a':
-          dispatch({ type: 'left' });
-          break;
-        case 'arrowright':
-        case 'd':
-          dispatch({ type: 'right' });
-          break;
-        default:
-          return;
-      }
+      const move = getMoveAction(key);
+      if (!move) return;
+
+      dispatch({ type: move });
+      isThrottled.current = true;
+      const timeout = setTimeout(() => {
+        isThrottled.current = false;
+      }, 200);
+
+      return () => clearTimeout(timeout);
     },
     [dispatch]
   );
@@ -37,4 +31,23 @@ export const useKeyDown = (dispatch: Dispatch<MoveAction | CleanupAction>) => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
+};
+
+const getMoveAction = (key: string): MoveAction['type'] | null => {
+  switch (key) {
+    case 'arrowup':
+    case 'w':
+      return 'up';
+    case 'arrowdown':
+    case 's':
+      return 'down';
+    case 'arrowleft':
+    case 'a':
+      return 'left';
+    case 'arrowright':
+    case 'd':
+      return 'right';
+    default:
+      return null;
+  }
 };
