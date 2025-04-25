@@ -13,11 +13,11 @@ export const createTile = (state: GameState, action: TileAction): GameState => {
     ...state.tileMap,
     [id]: tile, // update tilemap with new tile
   };
-  const activeTilesId = [...state.activeTilesId, id];
+  const activeTilesIds = [...state.activeTilesIds, id];
   return {
     ...state,
     board,
     tileMap,
-    activeTilesId,
+    activeTilesIds,
   };
 };
