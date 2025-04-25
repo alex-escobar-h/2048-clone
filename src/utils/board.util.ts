@@ -1,5 +1,6 @@
 import { Board, Position } from '../types';
 import { BOARD_DIMENSION } from './constant';
+import { getRandomTilePosition } from './tile.util';
 
 // Create new 4x4 board intialized to null
 export const createBoard = (): Board => {
@@ -16,4 +17,10 @@ export const getAvailablePositions = (board: Board): Position[] => {
     }
   }
   return availablePositions;
+};
+
+export const getRandomAvailablePosition = (board: Board): Position | null => {
+  const availablePositions = getAvailablePositions(board);
+  if (availablePositions.length === 0) return null;
+  return getRandomTilePosition(availablePositions);
 };

@@ -29,8 +29,6 @@ export const useKeyDown = (dispatch: Dispatch<MoveAction | CleanupAction>) => {
         default:
           return;
       }
-
-      dispatch({ type: 'cleanup' });
     },
     [dispatch]
   );

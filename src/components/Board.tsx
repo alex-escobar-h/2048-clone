@@ -1,7 +1,12 @@
 import { BOARD_DIMENSION } from '../utils/';
 import styles from '../styles/Board.module.css';
 import { Tile } from './Tile';
+import { useContext } from 'react';
+
+import { GameContext } from '../contexts/GameContext';
+
 export const Board = () => {
+  const { getTiles } = useContext(GameContext);
   // Render 16 cells
   const renderCells = () => {
     return Array.from({ length: BOARD_DIMENSION * BOARD_DIMENSION }).map(
@@ -13,13 +18,11 @@ export const Board = () => {
       )
     );
   };
-
   const renderTiles = () => {
-    const tempLength = 2;
-    return Array.from({ length: tempLength }).map((_, i) => (
+    return getTiles().map((tile) => (
       <Tile
-        key={i}
-        value={4}
+        key={tile.id}
+        {...tile}
       />
     ));
   };
