@@ -1,6 +1,6 @@
 // prettier-ignore
 import { Board, CleanupAction, GameStatus, MoveAction, ResetAction, TileAction, TileId, TileMap, UpdateStatusAction } from "../types"
-import { createBoard } from '../utils';
+import { createBoard, createTile } from '../utils';
 
 /* --- Types --- */
 export type GameState = {
@@ -26,4 +26,16 @@ export const initialState: GameState = {
   status: 'playing',
   score: 0,
   hasBoardChanged: false,
+};
+
+export const reducer = (
+  state: GameState = initialState,
+  action: GameAction
+) => {
+  switch (action.type) {
+    case 'create-tile':
+      return createTile(state, action);
+    default:
+      return state;
+  }
 };
