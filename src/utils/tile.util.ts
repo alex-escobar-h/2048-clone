@@ -21,3 +21,12 @@ export const createTile = (state: GameState, action: TileAction): GameState => {
     activeTilesIds,
   };
 };
+
+export const getRandomTilePosition = (position: Position[]) => {
+  const randomIdx = Math.floor(Math.random() * position.length);
+  return position[randomIdx];
+};
+
+export const getRandomTileValue = () => {
+  return Math.random() < 0.15 ? 4 : 2;
+};
