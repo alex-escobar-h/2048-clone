@@ -70,6 +70,7 @@ body {
   /* background-color: var(--primary-bg);
   color: var(--primary-text-color); */
   background-color: hsl(120, 4%, 22%);
+  background-color: var(--4-tile);
   color: hsl(120, 4%, 82%);
   min-height: 100svh;
   display: flex;

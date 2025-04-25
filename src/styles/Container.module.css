@@ -1,4 +1,5 @@
 .container {
-  width: var(--board-size);
-  border: 1px solid white;
+  min-width: var(--board-size);
+  background-color: var(--4-tile);
+  border-radius: var(--board-radius);
 }

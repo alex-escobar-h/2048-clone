@@ -18,6 +18,7 @@
   font-size: 2.125rem;
   font-weight: 700;
   letter-spacing: -0.5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
 }
 
 .scoreContainer {
@@ -28,15 +29,25 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
 }
 
 .scoreTitle {
   padding: 0.75rem 0 0.5rem;
   font-weight: 700;
   font-size: 1rem;
-  color: hsla(30, 8%, 41%, 0.75);
+  color: hsla(30, 8%, 41%, 0.85);
 }
 .score {
+  background: rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 85%;
+  height: 50%;
   font-size: 1.25rem;
   font-weight: 700;
+  color: #605851c3;
+  border-radius: var(--tile-radius);
 }
