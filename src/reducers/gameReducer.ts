@@ -3,7 +3,6 @@ import { Board, CleanupAction, GameStatus, MoveAction,  ResetAction, TileAction,
 import { createBoard, createTile, moveTiles, normalizeBoard } from '../utils';
 
 /* --- Types --- */
-
 export type GameState = {
   board: Board;
   tileMap: TileMap;
@@ -40,6 +39,10 @@ export const gameReducer = (
       return createTile(state, action);
     case 'cleanup':
       return normalizeBoard(state);
+    case 'reset-game':
+      return initialState;
+    case 'update-status':
+      return { ...state, status: action.status };
     case 'up':
     case 'down':
     case 'left':
@@ -50,11 +53,9 @@ export const gameReducer = (
         left: { axis: 'row', direction: 'forward' },
         right: { axis: 'row', direction: 'backward' },
       } as const;
-
       const moveOptions = directionMap[action.type];
       return moveTiles(state, moveOptions);
     }
-
     default:
       return state;
   }

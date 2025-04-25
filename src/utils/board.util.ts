@@ -1,5 +1,4 @@
-import { GameState } from '../reducers/gameReducer';
-import { Board } from '../types';
+import { Board, Position } from '../types';
 import { BOARD_DIMENSION } from './constant';
 
 // Create new 4x4 board intialized to null
@@ -9,22 +8,12 @@ export const createBoard = (): Board => {
   );
 };
 
-// Cleans up game state after a move or a merge
-export const normalizeBoard = (state: GameState): GameState => {
-  const board = state.board;
-  const flatBoard = board.flat(Infinity);
-  // Copy active tiles to a new tile map
-  const tileMap = flatBoard.reduce((result, tileId) => {
-    if (tileId === null) return result;
-    const tile = state.tileMap[tileId as string];
-    if (!tile) return result;
-    return { ...result, [tileId as string]: { ...tile } };
-  }, {});
-  const activeTilesIds = Object.keys(tileMap);
-  return {
-    ...state,
-    tileMap,
-    activeTilesIds,
-    hasBoardChanged: false,
-  };
+export const getAvailablePositions = (board: Board): Position[] => {
+  const availablePositions: Position[] = [];
+  for (let row = 0; row < BOARD_DIMENSION; row++) {
+    for (let col = 0; col < BOARD_DIMENSION; col++) {
+      if (board[row][col] === null) availablePositions.push([col, row]);
+    }
+  }
+  return availablePositions;
 };
