@@ -17,6 +17,7 @@ export const moveTiles = (
   const newBoard: Board = createBoard();
   const newTileMap: TileMap = {};
   let { score } = state; // For incrementing score
+
   let hasBoardChanged = false; // flag to determine changes
 
   // Setup iteration ranges based on board size
@@ -44,7 +45,6 @@ export const moveTiles = (
       if (prevTile && prevTile.value === curTile.value) {
         const mergedValue = prevTile.value * 2; // double value
         score += mergedValue; // add merge value to total score
-
         // Update the prev tile with merged value in the updated tile map
         const prevId = prevTile.id!;
         newTileMap[prevId] = {
@@ -84,12 +84,13 @@ export const moveTiles = (
       }
     }
   }
-
-  return {
+  const t = {
     ...state,
     board: newBoard,
     tileMap: newTileMap,
     score,
     hasBoardChanged,
   };
+  console.log(t);
+  return t;
 };
