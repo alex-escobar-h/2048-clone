@@ -1,0 +1,4 @@
+.container {
+  width: var(--board-size);
+  border: 1px solid white;
+}

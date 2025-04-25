@@ -41,14 +41,17 @@
 
   /* --- Sizing --- */
   --tile-size: 65px;
-  --grid-gap: 6px;
-  --border-size: 16px;
-  --board-radius: 8px;
+  --grid-gap: 10px;
+  --border-size: 12px;
   --tile-radius: 6px;
+  --board-radius: 10px;
+  --score-box-height: 90px;
+  --score-box-width: 90px;
+  --logo-size: 100px;
 
   /* --- Calculated Layout --- */
-  --grid-size: calc((var(--tile-size) * 4) + (var(--grid-gap) * 3));
-  --board-size: calc(var(--grid-size) + (2 * var(--border-size)));
+  --grid-size: calc((var(--tile-size) * 4) + (var(--grid-gap) * 3)); /* 290px */
+  --board-size: calc(var(--grid-size) + (2 * var(--border-size))); /* 314px */
 }
 
 /* --- Basic CSS Reset --- */
