@@ -1,4 +1,4 @@
-import { BOARD_DIMENSION } from '../utils/constant';
+import { BOARD_DIMENSION } from '../utils/';
 import styles from '../styles/Board.module.css';
 import { Tile } from './Tile';
 export const Board = () => {

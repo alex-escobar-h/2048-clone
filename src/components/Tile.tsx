@@ -1,5 +1,5 @@
 import styles from '../styles/Tile.module.css';
-import { WIN_VALUE } from '../utils/constant';
+import { WIN_VALUE } from '../utils/';
 
 type TileProps = {
   value: number;
