@@ -41,7 +41,7 @@
 
   /* --- Sizing --- */
   --tile-size: 65px;
-  --grid-gap: 10px;
+  --grid-gap: 8px;
   --border-size: 12px;
   --tile-radius: 6px;
   --board-radius: 10px;

@@ -1,5 +1,5 @@
 import { BOARD_DIMENSION } from '../utils/constant';
-
+import styles from '../styles/Board.module.css';
 export const Board = () => {
   // Render 16 cells
   const renderCells = () => {
@@ -7,7 +7,7 @@ export const Board = () => {
       (_, i) => (
         <div
           key={i}
-          className='cell'
+          className={styles.cell}
         />
       )
     );
@@ -26,10 +26,10 @@ export const Board = () => {
   };
 
   return (
-    <section className='board'>
-      <div className='grid'>
+    <section className={styles.board}>
+      <div className={styles.grid}>
         {renderCells()}
-        <div className='tiles'>{renderTiles()}</div>
+        {/* <div className='tiles'>{renderTiles()}</div> */}
       </div>
     </section>
   );
