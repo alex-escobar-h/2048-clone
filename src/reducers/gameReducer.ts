@@ -1,8 +1,9 @@
 // prettier-ignore
-import { Board, CleanupAction, GameStatus, MoveAction, ResetAction, TileAction, TileId, TileMap, UpdateStatusAction } from "../types"
-import { createBoard, createTile } from '../utils';
+import { Board, CleanupAction, GameStatus, MoveAction,  ResetAction, TileAction, TileId, TileMap, UpdateStatusAction } from "../types"
+import { createBoard, createTile, moveTiles } from '../utils';
 
 /* --- Types --- */
+
 export type GameState = {
   board: Board;
   tileMap: TileMap;
@@ -19,6 +20,7 @@ export type GameAction =
   | ResetAction
   | UpdateStatusAction;
 
+/* --- Reducer State --- */
 export const initialState: GameState = {
   board: createBoard(),
   tileMap: {},
@@ -28,13 +30,29 @@ export const initialState: GameState = {
   hasBoardChanged: false,
 };
 
-export const reducer = (
+/* --- Dispatch function --- */
+export const gameReducer = (
   state: GameState = initialState,
   action: GameAction
 ) => {
   switch (action.type) {
     case 'create-tile':
       return createTile(state, action);
+    case 'up':
+    case 'down':
+    case 'left':
+    case 'right': {
+      const directionMap = {
+        up: { axis: 'col', direction: 'forward' },
+        down: { axis: 'col', direction: 'backward' },
+        left: { axis: 'row', direction: 'forward' },
+        right: { axis: 'row', direction: 'backward' },
+      } as const;
+
+      const moveOptions = directionMap[action.type];
+      return moveTiles(state, moveOptions);
+    }
+
     default:
       return state;
   }

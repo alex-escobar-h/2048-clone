@@ -1,6 +1,6 @@
 export type TileId = string;
 
-export type Position = [col: number, row: number];
+export type Position = [number, number];
 
 export type Tile = {
   id?: TileId;
