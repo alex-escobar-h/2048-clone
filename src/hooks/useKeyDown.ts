@@ -1,13 +1,16 @@
 import { Dispatch, useCallback, useEffect, useRef } from 'react';
 
-import { CleanupAction, MoveAction } from '../types';
+import { CleanupAction, GameStatus, MoveAction } from '../types';
 
-export const useKeyDown = (dispatch: Dispatch<MoveAction | CleanupAction>) => {
+export const useKeyDown = (
+  dispatch: Dispatch<MoveAction | CleanupAction>,
+  status: GameStatus
+) => {
   const isThrottled = useRef(false);
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      if (isThrottled.current) return;
+      if (isThrottled.current || status === 'lost') return;
 
       e.preventDefault();
 
@@ -24,7 +27,7 @@ export const useKeyDown = (dispatch: Dispatch<MoveAction | CleanupAction>) => {
 
       return () => clearTimeout(timeout);
     },
-    [dispatch]
+    [dispatch, status]
   );
 
   useEffect(() => {

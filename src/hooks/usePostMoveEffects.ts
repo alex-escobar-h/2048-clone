@@ -13,9 +13,7 @@ export const usePostMoveEffects = ({
   addNewTile,
 }: PostMoveEffectsProps) => {
   useEffect(() => {
-    console.log(hasChanged);
     if (hasChanged) {
-      console.log('change');
       const timeout = setTimeout(() => {
         dispatch({ type: 'cleanup' });
         addNewTile();
