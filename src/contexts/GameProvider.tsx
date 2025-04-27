@@ -35,11 +35,6 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
 
   const startGame = () => {
     dispatch({ type: 'reset-game' });
-    console.log('stargame!!!!');
-    console.log('status:', gameState.status);
-    for (let i = 0; i < 2; i++) {
-      addNewTile();
-    }
   };
 
   const updateStatus = (status: GameStatus) => {
@@ -65,7 +60,11 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  useInitializeGame(startGame);
+  useInitializeGame({
+    status: gameState.status,
+    isBoardEmpty: gameState.activeTilesIds.length === 0,
+    addNewTile,
+  });
   useKeyDown(dispatch, gameState.status);
   usePostMoveEffects({
     hasChanged: gameState.hasBoardChanged,
