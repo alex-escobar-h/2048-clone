@@ -3,6 +3,7 @@ import {
   useInitializeGame,
   useKeyDown,
   usePostMoveEffects,
+  useSwipeMove,
 } from '../hooks/';
 import {
   getAvailablePositions,
@@ -68,6 +69,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     addNewTile,
   });
   useKeyDown(dispatch, gameState.status);
+  useSwipeMove(dispatch, gameState.status);
   usePostMoveEffects({
     hasChanged: gameState.hasBoardChanged,
     dispatch,
