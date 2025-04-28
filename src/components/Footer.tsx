@@ -4,17 +4,9 @@ const Footer = () => {
     <div className={styles.footer}>
       <div className={styles.container}>
         <p>
-          2048 Clone by <span className={styles.author}>Alex Escobar</span>
+          By <span className={styles.author}>Alex Escobar</span>
         </p>
         <div className={styles.socials}>
-          <a
-            className={styles.social}
-            href='https://www.linkedin.com/in/alex-h-escobar'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            LinkedIn
-          </a>
           <a
             className={styles.social}
             href='https://github.com/alex-escobar-h'
@@ -22,6 +14,14 @@ const Footer = () => {
             rel='noopener noreferrer'
           >
             GitHub
+          </a>
+          <a
+            className={styles.social}
+            href='https://www.linkedin.com/in/alex-h-escobar'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            LinkedIn
           </a>
         </div>
       </div>
