@@ -15,6 +15,10 @@ export const useSwipeMove = (
       touchStartY.current = e.touches[0].clientY;
     };
 
+    const handleTouchMove = (e: TouchEvent) => {
+      e.preventDefault();
+    };
+
     const handleTouchEnd = (e: TouchEvent) => {
       if (isThrottled.current || status === 'lost' || status === 'won') return;
 
@@ -34,10 +38,12 @@ export const useSwipeMove = (
     };
 
     window.addEventListener('touchstart', handleTouchStart);
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
     window.addEventListener('touchend', handleTouchEnd);
 
     return () => {
       window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleTouchEnd);
     };
   }, [dispatch, status]);
