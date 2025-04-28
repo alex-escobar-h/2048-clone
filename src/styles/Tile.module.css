@@ -6,9 +6,35 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
   font-weight: 700;
   box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.2),
     inset -3px -3px 6px rgba(255, 255, 255, 0.25);
   transition: top 200ms, left 200ms;
+}
+
+.tile2,
+.tile4,
+.tile8 {
+  font-size: var(--tile-font-large);
+}
+
+.tile16,
+.tile32,
+.tile64 {
+  font-size: var(--tile-font-medium-large);
+}
+
+.tile128,
+.tile256,
+.tile512 {
+  font-size: var(--tile-font-medium);
+}
+
+.tile1024,
+.tile2048 {
+  font-size: var(--tile-font-medium-small);
+}
+
+.tileMax {
+  font-size: var(--tile-font-small);
 }

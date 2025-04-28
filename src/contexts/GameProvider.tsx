@@ -29,7 +29,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
       type: 'create-tile',
       tile: {
         position: pos,
-        value: 256,
+        value: getRandomTileValue(),
       },
     });
   };

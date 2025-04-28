@@ -39,7 +39,7 @@
   --2048-text: var(--tile-text-light);
   --max-text: var(--tile-text-light);
 
-  /* --- Sizing --- */
+  /* --- Board Sizing --- */
   --tile-size: 65px;
   --grid-gap: 8px;
   --border-size: 12px;
@@ -48,6 +48,13 @@
   --score-box-height: 90px;
   --score-box-width: 90px;
   --logo-size: 100px;
+
+  /* --- Tile Font Sizes --- */
+  --tile-font-small: 1rem;
+  --tile-font-medium-small: 1.1rem;
+  --tile-font-medium: 1.25rem;
+  --tile-font-medium-large: 1.4rem;
+  --tile-font-large: 1.5rem;
 
   /* --- Calculated Layout --- */
   --grid-size: calc((var(--tile-size) * 4) + (var(--grid-gap) * 3)); /* 290px */

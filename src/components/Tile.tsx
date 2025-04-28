@@ -9,10 +9,12 @@ type TileProps = {
 export const Tile = ({ value, position }: TileProps) => {
   const [col, row] = position;
   const getPosition = (pos: number) => STEPS * pos;
+  const styleValue = WIN_VALUE >= value ? value : 'max';
+  const tileFontSize = styles[`tile${value}`] || styles.tileMax;
 
   const colorStyles = {
-    backgroundColor: `var(--${WIN_VALUE >= value ? value : 'max'}-tile)`,
-    color: `var(--${WIN_VALUE >= value ? value : 'max'}-text)`,
+    backgroundColor: `var(--${styleValue}-tile)`,
+    color: `var(--${styleValue}-text)`,
   };
   const animationStyles = {
     left: getPosition(col),
@@ -21,7 +23,7 @@ export const Tile = ({ value, position }: TileProps) => {
   };
   return (
     <div
-      className={styles.tile}
+      className={`${styles.tile} ${tileFontSize}`}
       style={{ ...colorStyles, ...animationStyles }}
     >
       {value}
