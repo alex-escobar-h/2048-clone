@@ -1,3 +1,7 @@
+import { gameReducer, initialState } from '../reducers/gameReducer';
+import { PropsWithChildren, useReducer } from 'react';
+import { GameContext } from './GameContext';
+import { GameStatus } from '../types';
 import {
   useGameStatusChecker,
   useInitializeGame,
@@ -12,10 +16,6 @@ import {
   hasMergeableTiles,
   WIN_VALUE,
 } from '../utils';
-import { gameReducer, initialState } from '../reducers/gameReducer';
-import { PropsWithChildren, useReducer } from 'react';
-import { GameContext } from './GameContext';
-import { GameStatus } from '../types';
 
 export const GameProvider = ({ children }: PropsWithChildren) => {
   const [gameState, dispatch] = useReducer(gameReducer, initialState);
@@ -63,19 +63,24 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
+  // Creates initial tiles for new game
   useInitializeGame({
     status: gameState.status,
     isBoardEmpty: gameState.activeTilesIds.length === 0,
     addNewTile,
   });
+
+  // Handles keyboard input
   useKeyDown(dispatch, gameState.status);
+  // Handles swipe input
   useSwipeMove(dispatch, gameState.status);
+  // Cleans up board and adds new tile after each move
   usePostMoveEffects({
     hasChanged: gameState.hasBoardChanged,
     dispatch,
     addNewTile,
   });
-
+  // Check if user has won, lost, or still playing
   useGameStatusChecker({
     hasChanged: gameState.hasBoardChanged,
     checkGameStatus,
