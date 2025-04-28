@@ -1,5 +1,5 @@
 .container {
-  width: 100%;
+  width: var(--board-size);
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
