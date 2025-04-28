@@ -91,6 +91,5 @@ export const moveTiles = (
     score,
     hasBoardChanged,
   };
-  console.log(newState); // TODO: Remove
   return newState;
 };
