@@ -1,38 +1,26 @@
-import { GameContext } from '../contexts/GameContext';
 import { useContext } from 'react';
+import { GameContext } from '../contexts/GameContext';
 import styles from '../styles/ResultsModal.module.css';
 
 export const ResultsModal = () => {
   const { startGame, updateStatus, status, score } = useContext(GameContext);
-  const title = { won: 'You Won!', lost: 'Game Over', playing: '' } as const;
-  if (status === 'playing') return null;
 
-  const isWon = status === 'won';
-  const isLost = status === 'lost';
-
-  const resetGame = () => {
+  const continuePlaying = () => {
     if (updateStatus) {
-      updateStatus('playing');
+      updateStatus('continue-playing');
     }
-    console.log(status, '!!!!!!');
   };
 
   return (
     <div className={styles.container}>
-      <h3>{isWon ? title.won : title.lost}</h3>
-
-      {isLost && <p>Total score: {score}</p>}
+      <h3>{status === 'won' ? 'You Won!' : 'Game Over'}</h3>
+      {status === 'lost' && <p>Total score: {score}</p>}
 
       <div className={styles.actions}>
-        <button
-          onClick={() => {
-            console.log('Start Game btn');
-            startGame();
-          }}
-        >
-          Play Again?
-        </button>
-        {isWon && <button onClick={resetGame}>Continue Playing</button>}
+        <button onClick={startGame}>Play Again?</button>
+        {status === 'won' && (
+          <button onClick={continuePlaying}>Continue Playing</button>
+        )}
       </div>
     </div>
   );

@@ -1,1 +1,1 @@
-export type GameStatus = 'playing' | 'won' | 'lost';
+export type GameStatus = 'playing' | 'won' | 'lost' | 'continue-playing';

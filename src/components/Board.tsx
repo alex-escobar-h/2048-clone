@@ -4,9 +4,11 @@ import { Tile } from './Tile';
 import { useContext } from 'react';
 
 import { GameContext } from '../contexts/GameContext';
+import { ResultsModal } from './ResultsModal';
 
 export const Board = () => {
-  const { getTiles } = useContext(GameContext);
+  const { getTiles, status } = useContext(GameContext);
+
   // Render 16 cells
   const renderCells = () => {
     return Array.from({ length: BOARD_DIMENSION * BOARD_DIMENSION }).map(
@@ -33,6 +35,7 @@ export const Board = () => {
         {renderCells()}
         <div className={styles.tiles}>{renderTiles()}</div>
       </div>
+      {(status === 'won' || status === 'lost') && <ResultsModal />}
     </section>
   );
 };

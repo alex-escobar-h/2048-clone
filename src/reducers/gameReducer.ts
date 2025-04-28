@@ -1,5 +1,5 @@
 // prettier-ignore
-import { Board, CleanupAction, GameStatus, MoveAction,  ResetAction, TileAction, TileId, TileMap, UpdateStatusAction } from "../types"
+import { Board, CleanupAction, ContinuePlayingAction, GameStatus, MoveAction,  ResetAction, TileAction, TileId, TileMap, UpdateStatusAction } from "../types"
 import { createBoard, createTile, moveTiles, normalizeBoard } from '../utils';
 
 /* --- Types --- */
@@ -10,6 +10,7 @@ export type GameState = {
   status: GameStatus;
   score: number;
   hasBoardChanged: boolean;
+  hasWon: boolean;
 };
 
 export type GameAction =
@@ -17,7 +18,8 @@ export type GameAction =
   | TileAction
   | MoveAction
   | ResetAction
-  | UpdateStatusAction;
+  | UpdateStatusAction
+  | ContinuePlayingAction;
 
 /* --- Reducer State --- */
 export const initialState: GameState = {
@@ -27,6 +29,7 @@ export const initialState: GameState = {
   status: 'playing',
   score: 0,
   hasBoardChanged: false,
+  hasWon: false,
 };
 
 /* --- Dispatch function --- */
@@ -41,6 +44,8 @@ export const gameReducer = (
       return normalizeBoard(state);
     case 'reset-game':
       return initialState;
+    case 'continue-playing':
+      return { ...state, status: 'playing' as GameStatus, hasWon: true };
     case 'update-status':
       return { ...state, status: action.status };
     case 'up':

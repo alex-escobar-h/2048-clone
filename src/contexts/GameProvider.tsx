@@ -18,6 +18,7 @@ import { GameStatus } from '../types';
 
 export const GameProvider = ({ children }: PropsWithChildren) => {
   const [gameState, dispatch] = useReducer(gameReducer, initialState);
+
   const getTiles = () =>
     gameState.activeTilesIds.map((id) => gameState.tileMap[id]);
 
@@ -42,20 +43,22 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   };
 
   const checkGameStatus = () => {
-    const hasWon =
-      Object.values(gameState.tileMap).filter((t) => t.value === WIN_VALUE)
-        .length > 0;
-    if (hasWon) {
-      updateStatus('won');
+    if (gameState.status !== 'playing') return;
+
+    if (!gameState.hasWon) {
+      const hasWon =
+        Object.values(gameState.tileMap).filter((t) => t.value === WIN_VALUE)
+          .length > 0;
+      if (hasWon) {
+        updateStatus('won');
+        return;
+      }
     }
+
     const isBoardFull = getAvailablePositions(gameState.board).length === 0;
     const isMergable = hasMergeableTiles(gameState.board, gameState.tileMap);
-    console.log('isBoardFull', isBoardFull);
-    console.log('isMergable', isMergable);
-    console.log('Status:', gameState.status);
 
-    if (isBoardFull && !isMergable && gameState.status === 'playing') {
-      console.log('lost');
+    if (isBoardFull && !isMergable) {
       updateStatus('lost');
     }
   };

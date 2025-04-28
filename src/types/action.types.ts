@@ -17,3 +17,5 @@ export type UpdateStatusAction = {
   type: 'update-status';
   status: GameStatus;
 };
+
+export type ContinuePlayingAction = { type: 'continue-playing' };
