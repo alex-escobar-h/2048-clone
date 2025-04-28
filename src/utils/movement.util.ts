@@ -84,12 +84,13 @@ export const moveTiles = (
       }
     }
   }
-  const t = {
+  const newState = {
     ...state,
     board: newBoard,
     tileMap: newTileMap,
     score,
     hasBoardChanged,
   };
-  return t;
+  console.log(newState); // TODO: Remove
+  return newState;
 };

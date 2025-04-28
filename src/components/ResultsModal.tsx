@@ -3,11 +3,11 @@ import { GameContext } from '../contexts/GameContext';
 import styles from '../styles/ResultsModal.module.css';
 
 export const ResultsModal = () => {
-  const { startGame, updateStatus, status, score } = useContext(GameContext);
+  const { startGame, dispatch, status, score } = useContext(GameContext);
 
   const continuePlaying = () => {
-    if (updateStatus) {
-      updateStatus('continue-playing');
+    if (dispatch) {
+      dispatch({ type: 'continue-playing' });
     }
   };
 

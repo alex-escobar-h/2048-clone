@@ -29,7 +29,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
       type: 'create-tile',
       tile: {
         position: pos,
-        value: getRandomTileValue(),
+        value: 256,
       },
     });
   };
@@ -45,14 +45,13 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
   const checkGameStatus = () => {
     if (gameState.status !== 'playing') return;
 
-    if (!gameState.hasWon) {
-      const hasWon =
-        Object.values(gameState.tileMap).filter((t) => t.value === WIN_VALUE)
-          .length > 0;
-      if (hasWon) {
-        updateStatus('won');
-        return;
-      }
+    const hasReachedWinTile = Object.values(gameState.tileMap).some(
+      (t) => t.value === WIN_VALUE
+    );
+
+    if (hasReachedWinTile && !gameState.hasWon) {
+      updateStatus('won');
+      return;
     }
 
     const isBoardFull = getAvailablePositions(gameState.board).length === 0;
@@ -88,6 +87,7 @@ export const GameProvider = ({ children }: PropsWithChildren) => {
         getTiles,
         startGame,
         updateStatus,
+        dispatch,
       }}
     >
       {children}
