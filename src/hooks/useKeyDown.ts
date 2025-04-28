@@ -10,7 +10,7 @@ export const useKeyDown = (
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      if (isThrottled.current || status === 'lost') return;
+      if (isThrottled.current || status === 'lost' || status === 'won') return;
 
       e.preventDefault();
 

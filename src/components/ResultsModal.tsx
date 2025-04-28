@@ -12,15 +12,21 @@ export const ResultsModal = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <h3>{status === 'won' ? 'You Won!' : 'Game Over'}</h3>
-      {status === 'lost' && <p>Total score: {score}</p>}
+    <div className={styles.modal}>
+      <div className={styles.container}>
+        <h3 className={styles.title}>
+          {status === 'won' ? 'You Won!' : 'Game Over'}
+        </h3>
+        <p className={styles.score}>
+          Total Score: <span className={styles.scoreVal}>{score}</span>
+        </p>
 
-      <div className={styles.actions}>
-        <button onClick={startGame}>Play Again?</button>
-        {status === 'won' && (
-          <button onClick={continuePlaying}>Continue Playing</button>
-        )}
+        <div className={styles.actions}>
+          <a onClick={startGame}>Play Again?</a>
+          {status === 'won' && (
+            <a onClick={continuePlaying}>Continue Playing</a>
+          )}
+        </div>
       </div>
     </div>
   );

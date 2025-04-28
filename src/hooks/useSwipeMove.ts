@@ -16,7 +16,7 @@ export const useSwipeMove = (
     };
 
     const handleTouchEnd = (e: TouchEvent) => {
-      if (isThrottled.current || status === 'lost') return;
+      if (isThrottled.current || status === 'lost' || status === 'won') return;
 
       const dx = e.changedTouches[0].clientX - touchStartX.current;
       const dy = e.changedTouches[0].clientY - touchStartY.current;
@@ -48,7 +48,6 @@ const getSwipeMoveAction = (
   dy: number
 ): MoveAction['type'] | null => {
   const threshold = 30; // Minimum distance before it counts as swipe
-  console.log('Swipe detected', { dx, dy });
 
   if (Math.abs(dx) > Math.abs(dy)) {
     // Horizontal swipe
